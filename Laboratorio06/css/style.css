@@ -94,3 +94,120 @@ header h1 {
     background-color: lightseagreen;
     color: white;
 }
+
+.section-tabla {
+    font-size: 8px;
+}
+
+.div-resultados-text {
+    font-size: 20px;
+    text-align: center;
+}
+
+.divTable{
+	display: table;
+	width: 100%;
+    padding: 10px;
+}
+
+.divTableRow {
+	display: table-row;
+}
+
+.divTableHeading {
+	background-color: #EEE;
+	display: table-header-group;
+}
+
+.divTableCell, .divTableHead {
+	border: 1px solid #999999;
+	display: table-cell;
+	padding: 3px 10px;
+}
+
+.divTableHeading {
+	background-color: #EEE;
+	display: table-header-group;
+	font-weight: bold;
+}
+
+.divTableFoot {
+	background-color: #EEE;
+	display: table-footer-group;
+	font-weight: bold;
+}
+
+.divTableBody {
+	display: table-row-group;
+}
+
+.div-text-center {
+    text-align: center;
+}
+
+.tab-codigo {
+    width: 5%;
+    text-align: center;
+}
+
+.tab-nombre {
+    width: 20%;
+}
+
+.tab-gestion {
+    width: 4%;
+    text-align: center;
+}
+
+.tab-estado {
+    width: 7%;
+    text-align: center;
+}
+
+.tab-inicio {
+    width: 8%;
+
+}
+
+.tab-fin {
+    width: 8%;
+}
+
+.tab-periodo {
+    width: 7%;
+}
+
+.tab-departamento {
+    width: 5%;
+}
+
+.tab-provincia {
+    width: 7%;
+}
+
+.tab-distrito {
+    width: 7%;
+}
+
+.tab-ubigeo {
+    width: 3%;
+    text-align: center;
+}
+
+.tab-latitud {
+    width: 4%;
+    text-align: center;
+}
+
+.tab-longitud {
+    width: 4%;
+    text-align:center;
+}
+
+.tab-corte {
+    text-align:center;
+}
+
+.tab-dir {
+    text-align: center;
+}
