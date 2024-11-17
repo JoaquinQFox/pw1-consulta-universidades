@@ -1,0 +1,44 @@
+* {
+    font-family: Helvetica, Arial, sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+}
+
+body {
+    margin: 0;
+}
+
+header {
+    background-color: cyan;
+    margin: 0;
+}
+
+header h1 {
+    color: white;
+    text-align: center;
+    padding: 10px;
+}
+
+.section-formulario {
+    border-style: solid;
+    padding: 10px;
+}
+
+.div-form-opcion {
+    border-style: solid;
+    padding: 10px;
+}
+
+.div-form-lugar {
+    border-style: solid;
+    padding: 10px;
+}
+
+.div-form-submit {
+    border-style: solid;
+    padding: 5px;;
+}
+
+.div-form-submit input {
+
+}
