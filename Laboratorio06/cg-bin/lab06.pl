@@ -1,3 +1,4 @@
+
 #!/usr/bin/perl
 
 use strict;
@@ -48,4 +49,45 @@ while (my $row = $csv->getline($fh)) {
 }
 close $fh;
 
+# Generar HTML
+print <<'HTML';
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Resultados de Universidades</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <header>
+        <h1>Resultados de la búsqueda</h1>
+    </header>
+    <section class="section-tabla">
+HTML
 
+if (@resultados) {
+    print "<div class='div-resultados-text'><p>Encontrados: " . scalar(@resultados) . " Universidades</p></div>";
+    print "<div class='divTable'>";
+    print "<div class='divTableHeading'><div class='divTableRow'>";
+    foreach my $col (@columns) {
+        print "<div class='divTableHead'>$col</div>";
+    }
+    print "</div></div>";
+    print "<div class='divTableBody'>";
+    foreach my $res (@resultados) {
+        print "<div class='divTableRow'>";
+        foreach my $col (@columns) {
+            print "<div class='divTableCell'>$res->{$col}</div>";
+        }
+        print "</div>";
+    }
+    print "</div></div>";
+} else {
+    print "<p>No se encontraron resultados para los criterios ingresados.</p>";
+}
+
+print <<'HTML';
+    </section>
+</body>
+</html>
+HTML
