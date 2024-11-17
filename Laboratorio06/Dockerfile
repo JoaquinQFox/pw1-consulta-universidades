@@ -8,13 +8,14 @@ RUN apt-get update && \
 
 
 # Crear usuario y carpeta para pweb con permisos adecuados
-RUN mkdir -p /home/pweb && \
-    useradd pweb -m && echo "pweb:12345678" | chpasswd && \
-    echo "root:12345678" | chpasswd && \
-    chown pweb:www-data /usr/lib/cgi-bin/ && \
-    chown pweb:www.data /var/www/html/ && \
-    chmod 750 /usr/lib/cgi-bin/ && \
-    chmod 750 /var/www/html/
+RUN mkdir -p /home/pweb
+RUN useradd pweb -m && echo "pweb:12345678" | chpasswd
+RUN echo "root:12345678" | chpasswd
+RUN chown pweb:www-data /usr/lib/cgi-bin/
+RUN chown pweb:www-data /var/www/html/
+RUN chmod 750 /usr/lib/cgi-bin/
+RUN chmod 750 /var/www/html/
+
 
 # Crear enlaces simbólicos para facilitar el acceso
 RUN ln -s /usr/lib/cgi-bin /home/pweb/cgi-bin && \
@@ -27,6 +28,7 @@ RUN a2enmod cgid
 RUN service apache2 restart
 
 COPY ./cgi-bin/lab06.pl /usr/lib/cgi-bin
+COPY ./cgi-bin/Universidades_Lab06.csv /usr/lib/cgi-bin
 RUN chmod +x /usr/lib/cgi-bin/lab06.pl
 
 COPY ./html/index.html /var/www/html
