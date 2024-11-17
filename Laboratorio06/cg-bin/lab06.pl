@@ -17,7 +17,7 @@ my $provincia = $q->param("provincia") || "";
 my $distrito = $q->param("distrito") || "";
 
 # Ruta al archivo CSV
-my $csv_file = "../cgi-bin/Universidades_Lab06.csv";
+my $csv_file = "../cg-bin/Universidades_Lab06.csv";
 
 # Validar si el archivo CSV existe
 if (!-e $csv_file) {
@@ -72,6 +72,7 @@ if (@resultados) {
     foreach my $col (@columns) {
         print "<div class='divTableHead'>$col</div>";
     }
+    print "<div class='divTableHead'>GOOGLE MAPS</div>"; # Nueva columna
     print "</div></div>";
     print "<div class='divTableBody'>";
     foreach my $res (@resultados) {
@@ -79,6 +80,11 @@ if (@resultados) {
         foreach my $col (@columns) {
             print "<div class='divTableCell'>$res->{$col}</div>";
         }
+        # Agregar enlace a Google Maps
+        my $lat = $res->{"LATITUD"};
+        my $lon = $res->{"LONGITUD"};
+        my $maps_url = "https://www.google.com/maps?q=$lat,$lon";
+        print "<div class='divTableCell'><a href='$maps_url' target='_blank'>Ver en Google Maps</a></div>";
         print "</div>";
     }
     print "</div></div>";
