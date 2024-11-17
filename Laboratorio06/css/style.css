@@ -20,32 +20,74 @@ header h1 {
 }
 
 .section-formulario {
+    padding: 10px 0;
+    text-align: center;
+    margin: auto;
+    width: 70%;
+}
+
+.section-forulario p {
+    font-size: 1em;
+}
+
+.section-formulario input, select {
     border-style: solid;
-    padding: 10px;
+    border-color: lightseagreen;
+    border-width: 1.8px;
+    box-shadow: none;
+}
+
+.section-formulario input:focus, select:focus, input:active, select:active {
+    border-color: blue;
 }
 
 .div-form-opcion {
-    border-style: solid;
-    padding: 10px;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.div-form-opcion select, input {
+    font-size: 1em;
+    padding: 2px;
+}
+
+.div-form-opcion select {
+    width: 30%;
+}
+
+.div-form-opcion input {
+    width: 65%;
 }
 
 .div-form-lugar {
-    border-style: solid;
-    padding: 10px;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+}
+
+.div-form-lugar select, input{
+    width: 30%;
+    padding: 2px;
+    font-size: 1em;
+}
+
+.div-form-lugar input::placeholder {
+    color: black;
 }
 
 .div-form-submit {
-    border-style: solid;
-    padding: 5px;;
     text-align: center;
-    margin: auto;
-    width: 50%;
+    margin-top: 10px;
 }
 
 .div-form-submit input {
     display: block;
-    margin: auto;
+    margin: 0;
     width: 100%;
-    padding: 8px;
-    font-size: 10px;
+    padding: 5px;
+    font-size: 1.2em;
+    border-radius: 10px;
+    background-color: lightseagreen;
+    color: white;
 }
