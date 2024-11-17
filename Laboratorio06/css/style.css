@@ -17,6 +17,7 @@ header h1 {
     color: white;
     text-align: center;
     padding: 10px;
+    text-shadow: black; 
 }
 
 .section-formulario {
@@ -35,10 +36,17 @@ header h1 {
     border-color: lightseagreen;
     border-width: 1.8px;
     box-shadow: none;
+    border-radius: 5px;
+    padding: 5px;
 }
 
-.section-formulario input:focus, select:focus, input:active, select:active {
+.section-formulario input {
+    padding-left: 5px;
+}
+
+.section-formulario input:focus, select:focus {
     border-color: blue;
+    outline: none;
 }
 
 .div-form-opcion {
@@ -49,7 +57,6 @@ header h1 {
 
 .div-form-opcion select, input {
     font-size: 1em;
-    padding: 2px;
 }
 
 .div-form-opcion select {
@@ -68,12 +75,8 @@ header h1 {
 
 .div-form-lugar select, input{
     width: 30%;
-    padding: 2px;
     font-size: 1em;
-}
-
-.div-form-lugar input::placeholder {
-    color: black;
+    padding-left: 5px;
 }
 
 .div-form-submit {
