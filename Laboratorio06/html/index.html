@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <title>Busqueda Universidades</title>
     <link rel="stylesheet" href="../css/style.css">
 </head>
+
 <body>
     <header>
         <h1>Datos de Universidades del Perú</h1>
@@ -68,7 +70,92 @@
             <div class="div-form-submit">
                 <input type="submit" value="Buscar">
             </div>
-        </form>    
+        </form>
+    </section>
+
+    <!--Esta parte hay que mostrarla para el cgi-bin, por ahora solo doy el html con el diseño como base para luego solo pasarlo-->
+    <section class="section-tabla">
+        <div class="div-resultados-text">
+            <!--Mensaje de la busqueda, también podria decir que no se encontro nada en la base de datos-->
+            <p>Encontrados: 3 Universidades</p>
+        </div>
+        <div class="divTable">
+            <div class="divTableHeading">
+                <div class="divTableRow div-text-center">
+                    <div class="divTableHead tab-codigo">CODIGO_ENTIDAD</div>
+                    <div class="divTableHead tab-nombre">NOMBRE</div>
+                    <div class="divTableHead tab-gestion">TIPO_GESTIÓN</div>
+                    <div class="divTableHead tab-estado">ESTADO_LICENCIAMIENTO</div>
+                    <div class="divTableHead tab-inicio">FECHA_INICIO_LICENCIAMIENTO</div>
+                    <div class="divTableHead tab-fin">FECHA_FIN_LICENCIAMIENTO</div>
+                    <div class="divTableHead tab-periodo">PERIODO_LICENCIAMIENTO</div>
+                    <div class="divTableHead tab-departamento">DEPARTAMENTO</div>
+                    <div class="divTableHead tab-provincia">PROVINCIA</div>
+                    <div class="divTableHead tab-distrito">DISTRITO</div>
+                    <div class="divTableHead tab-ubigeo">UBIGEO</div>
+                    <div class="divTableHead tab-latitud">LATITUD</div>
+                    <div class="divTableHead tab-longitud">LONGITUD</div>
+                    <div class="divTableHead tab-corte">FECHA_CORTE</div>
+                    <div class="divTableHead tab-dir">DIRECCIÓN</div>
+                </div>
+            </div>
+            <div class="divTableBody">
+                <div class="divTableRow">
+                    <div class="divTableCell tab-codigo">1</div>
+                    <div class="divTableCell tab-nombre">UNIVERSIDAD NACIONAL MAYOR DE SAN MARCOS</div>
+                    <div class="divTableCell tab-gestion">PÚBLICO</div>
+                    <div class="divTableCell tab-estado">LICENCIA OTORGADA</div>
+                    <div class="divTableCell tab-inicio">20180410</div>
+                    <div class="divTableCell tab-fin">20280410</div>
+                    <div class="divTableCell tab-periodo">10</div>
+                    <div class="divTableCell tab-departamento">LIMA</div>
+                    <div class="divTableCell tab-provincia">LIMA</div>
+                    <div class="divTableCell tab-distrito">LIMA</div>
+                    <div class="divTableCell tab-ubigeo">140101</div>
+                    <div class="divTableCell tab-latitud">-12.0560257</div>
+                    <div class="divTableCell tab-longitud">-77.0844226</div>
+                    <div class="divTableCell tab-corte">20240828</div>
+                    <div class="divTableCell tab-dir"><a href=#>Ver dirección</a></div>
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell tab-codigo">2</div>
+                    <div class="divTableCell tab-nombre">UNIVERSIDAD NACIONAL INTERCULTURAL DE LA SELVA CENTRAL JUAN SANTOS ATAHUALPA</div>
+                    <div class="divTableCell tab-gestion">PÚBLICO</div>
+                    <div class="divTableCell tab-estado">LICENCIA OTORGADA</div>
+                    <div class="divTableCell tab-inicio">20180601</div>
+                    <div class="divTableCell tab-fin">20240601</div>
+                    <div class="divTableCell tab-periodo">6</div>
+                    <div class="divTableCell tab-departamento">HUANCAVELICA</div>
+                    <div class="divTableCell tab-provincia">PROV. CONST. DEL CALLAO</div>
+                    <div class="divTableCell tab-distrito">SAN JUAN DE LURIGANCHO</div>
+                    <div class="divTableCell tab-ubigeo">50101</div>
+                    <div class="divTableCell tab-latitud">-13.1612654</div>
+                    <div class="divTableCell tab-longitud">-74.2257339</div>
+                    <div class="divTableCell tab-corte">20240828</div>
+                    <div class="divTableCell tab-dir"><a href=#>Ver dirección</a></div>
+                </div>
+                <div class="divTableRow">
+                    <div class="divTableCell tab-codigo">4</div>
+                    <div class="divTableCell tab-nombre">UNIVERSIDAD NACIONAL DE TRUJILLO</div>
+                    <div class="divTableCell tab-gestion">PÚBLICO</div>
+                    <div class="divTableCell tab-estado">LICENCIA OTORGADA</div>
+                    <div class="divTableCell tab-inicio">20180921</div>
+                    <div class="divTableCell tab-fin">20260921</div>
+                    <div class="divTableCell tab-periodo">8</div>
+                    <div class="divTableCell tab-departamento">LA LIBERTAD</div>
+                    <div class="divTableCell tab-provincia">TRUJILLO</div>
+                    <div class="divTableCell tab-distrito">TRUJILLO</div>
+                    <div class="divTableCell tab-ubigeo">120101</div>
+                    <div class="divTableCell tab-latitud">-8.114377814</div>
+                    <div class="divTableCell tab-longitud">-79.03790143</div>
+                    <div class="divTableCell tab-corte">20240828</div>
+                    <div class="divTableCell tab-dir"><a href=#>Ver dirección</a></div>
+                </div>
+
+            </div>
+        </div>
+        <p>&nbsp;</p>
     </section>
 </body>
+
 </html>
