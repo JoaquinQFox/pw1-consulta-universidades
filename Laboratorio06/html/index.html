@@ -10,12 +10,42 @@
         <h1>Datos de Universidades del Perú</h1>
     </header>
 
-    <section class="section-busqueda-select">
-        
-    </section>
+    <section class="section-formulario-busqueda">
+        <form action="../cg-bin/lab06.pl">
 
-    <section class="section-busqueda-lugar">
+            <div class="div-form-opcion">
+                <label for="seccion">Elija una sección</label>
+                <select name="seccion" id="seccion">
+                    <option value="nombre">NOMBRE</option>
+                    <option value="gestion">TIPO DE GESTIÓN</option>
+                    <option value="estado-licenciamiento">ESTADO DE LICENCIAMIENTO</option>
+                    <option value="inicio-licenciamiento">FECHA INICIO DE LICENCIAMIENTO</option>
+                    <option value="fin-licenciamiento">FECHA FIN DE LICENCIAMIENTO</option>
+                    <option value="periodo">PERIODO DE LICENCIAMIENTO</option>
+                </select>
+            </div>
 
+            <div class="div-form-lugar">
+                <label for="departamento">Departamento:</label>
+                <select name="departamento" id="departamento">
+
+                </select>
+
+                <label for="provincia">Provincia:</label>
+                <select name="provincia" id="provincia">
+
+                </select>
+
+                <label for="distrito">Distrito:</label>
+                <select name="distrito" id="distrito">
+
+                </select>
+            </div>
+
+            <div class="div-form-submit">
+                <input type="submit" value="Buscar">
+            </div>
+        </form>    
     </section>
 </body>
 </html>
