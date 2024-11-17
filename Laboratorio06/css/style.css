@@ -37,8 +37,15 @@ header h1 {
 .div-form-submit {
     border-style: solid;
     padding: 5px;;
+    text-align: center;
+    margin: auto;
+    width: 50%;
 }
 
 .div-form-submit input {
-
+    display: block;
+    margin: auto;
+    width: 100%;
+    padding: 8px;
+    font-size: 10px;
 }
