@@ -1,29 +1,51 @@
-# Usa una imagen base con Apache y Perl
-FROM httpd:2.4
+FROM bitnami/minideb
 
-# Instala Perl y módulos necesarios para CGI
-RUN apt-get update && apt-get install -y \
-    perl \
-    libtext-csv-perl \
-    && apt-get clean
+ENV DEBIAN_FRONTEND="noninteractive"
 
-# Configuración para habilitar CGI en Apache
-RUN sed -i 's/#LoadModule cgi_module/LoadModule cgi_module/' /usr/local/apache2/conf/httpd.conf && \
-    echo "ScriptAlias /cgi-bin/ /usr/local/apache2/cgi-bin/" >> /usr/local/apache2/conf/httpd.conf && \
-    echo "<Directory \"/usr/local/apache2/cgi-bin\">\n    AllowOverride None\n    Options +ExecCGI\n    Require all granted\n</Directory>" >> /usr/local/apache2/conf/httpd.conf
+# Consolidar la instalación de paquetes y eliminar listas de apt después de la instalación
+RUN apt-get update && \
+    apt-get install -y apache2 perl openssh-server systemctl vim bash locales tree libcgi-pm-perl && \
+    apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Copiar archivos HTML y CSS al directorio correspondiente
-COPY html/index.html /usr/local/apache2/htdocs/
-COPY css/style.css /usr/local/apache2/htdocs/css/
+# Configurar locales para español (Perú)
+RUN echo -e 'LANG=es_PE.UTF-8\nLC_ALL=es_PE.UTF-8' > /etc/default/locale && \
+    sed -i 's/^# *\(es_PE.UTF-8\)/\1/' /etc/locale.gen && \
+    locale-gen es_PE.UTF-8
 
-# Copiar scripts CGI y el archivo CSV
-COPY cg-bin/* /usr/local/apache2/cgi-bin/
+# Crear usuario y carpeta para pweb con permisos adecuados
+RUN mkdir -p /home/pweb && \
+    useradd pweb -m && echo "pweb:12345678" | chpasswd && \
+    echo "root:12345678" | chpasswd && \
+    chown -R pweb:www-data /usr/lib/cgi-bin /var/www/html && \
+    chmod 750 /usr/lib/cgi-bin /var/www/html
 
-# Dar permisos de ejecución a los scripts CGI
-RUN chmod +x /usr/local/apache2/cgi-bin/*.pl
+# Configuración de variables de entorno en el bashrc de pweb
+RUN echo "export LC_ALL=es_PE.UTF-8" >> /home/pweb/.bashrc && \
+    echo "export LANG=es_PE.UTF-8" >> /home/pweb/.bashrc && \
+    echo "export LANGUAGE=es_PE.UTF-8" >> /home/pweb/.bashrc
 
-# Exponer el puerto 80 para el servidor web
-EXPOSE 80
+# Crear enlaces simbólicos para facilitar el acceso
+RUN ln -s /usr/lib/cgi-bin /home/pweb/cgi-bin && \
+    ln -s /var/www/html/ /home/pweb/html && \
+    ln -s /home/pweb /usr/lib/cgi-bin/toHOME && \
+    ln -s /home/pweb /var/www/html/toHOME
 
-# Comando por defecto para iniciar Apache
-CMD ["httpd-foreground"]
+# Habilitar el módulo CGI y copiar archivos necesarios
+RUN a2enmod cgid
+
+COPY ./cgi-bin/lab06.pl /usr/lib/cgi-bin
+RUN chmod +x /usr/lib/cgi-bin/lab06.pl
+
+COPY ./html/index.html /var/www/html
+
+RUN mkdir -p /var/www/html/css
+COPY ./css/style.css /var/www/html/css/
+RUN chown -R pweb:www-data /var/www/html/css && chmod -R 755 /var/www/html/css
+
+# Modificar configuración de SSH para evitar problemas con login
+RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+
+# Exponer puertos y comando de inicio
+EXPOSE 80 22
+
+CMD ["bash", "-c", "service ssh start && apachectl -D FOREGROUND"]
