@@ -175,13 +175,13 @@ while(my $line = <IN>) {
             ($distrito eq "" || $dict{distrito} =~ /$distrito/) ) {
 
             print "<div class='divTableRow'>\n";
-            print "<div class='divTableCell tab-codigo'>$dict{provincia}</div>\n";
+            print "<div class='divTableCell tab-codigo'>$dict{codigo_entidad}</div>\n";
             print "<div class='divTableCell tab-nombre'>$dict{nombre}</div>\n";
             print "<div class='divTableCell tab-gestion'>$dict{seccion_gestion}</div>\n";
             print "<div class='divTableCell tab-estado'>$dict{estado_licenciamiento}</div>\n";
-            print "<div class='divTableCell tab-inicio'>$dict{fecha_inicio_licenciamiento</div>\n";
-            print "<div class='divTableCell tab-fin'>$dict{fecha_fin_licenciamiento</div>\n";
-            print "<div class='divTableCell tab-periodo'>$dict{periodo_licenciamiento</div>\n";
+            print "<div class='divTableCell tab-inicio'>$dict{fecha_inicio_licenciamiento}</div>\n";
+            print "<div class='divTableCell tab-fin'>$dict{fecha_fin_licenciamiento}</div>\n";
+            print "<div class='divTableCell tab-periodo'>$dict{periodo_licenciamiento}</div>\n";
             print "<div class='divTableCell tab-departamento'>$dict{departamento}</div>\n";
             print "<div class='divTableCell tab-provincia'>$dict{provincia}</div>\n";
             print "<div class='divTableCell tab-distrito'>$dict{distrito}</div>\n";
