@@ -3,9 +3,10 @@ FROM debian:latest
 ENV DEBIAN_FRONTEND="noninteractive"
 
 RUN apt-get update && \
-    apt-get install -y apache2 perl libcgi-pm-perl && \
+    apt-get install -y apache2 perl libcgi-pm-perl cpanminus && \
     apt-get clean && rm -rf /var/lib/apt/lists/*
 
+RUN cpanm Text::Unidecode
 
 # Crear usuario y carpeta para pweb con permisos adecuados
 RUN mkdir -p /home/pweb

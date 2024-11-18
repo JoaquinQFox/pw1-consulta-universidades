@@ -46,7 +46,7 @@ sub sacar_datos {
 
 my $cgi = CGI -> new();
 
-my $seccion = $cgi->param("section") || "";
+my $seccion = $cgi->param("seccion") || "";
 
 my $busqueda = $cgi->param("busqueda") || "";
 
@@ -83,11 +83,11 @@ print "<div class='div-form-opcion'>\n";
 print "<select name='seccion' id='seccion'>\n";
 print "<option value='' hidden disabled selected>SELECCIONE OPCIÓN</option>\n";
 print "<option value='nombre'>NOMBRE</option>\n";
-print "<option value='gestion'>TIPO DE GESTIÓN</option>\n";
-print "<option value='estado-licenciamiento'>ESTADO DE LICENCIAMIENTO</option>\n";
-print "<option value='inicio-licenciamiento'>FECHA INICIO DE LICENCIAMIENTO</option>\n";
-print "<option value='fin-licenciamiento'>FECHA FIN DE LICENCIAMIENTO</option>\n";
-print "<option value='periodo'>PERIODO DE LICENCIAMIENTO</option>\n";
+print "<option value='seccion_gestion'>TIPO DE GESTIÓN</option>\n";
+print "<option value='estado_licenciamiento'>ESTADO DE LICENCIAMIENTO</option>\n";
+print "<option value='fecha_inicio_licenciamiento'>FECHA INICIO DE LICENCIAMIENTO</option>\n";
+print "<option value='fecha_fin_licenciamiento'>FECHA FIN DE LICENCIAMIENTO</option>\n";
+print "<option value='periodo_licenciamiento'>PERIODO DE LICENCIAMIENTO</option>\n";
 print "</select>\n";
 
 print "<input type='text' name='busqueda' placeholder='INGRESE BÚSQUEDA' autocomplete='off'>\n";
