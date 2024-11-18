@@ -138,37 +138,34 @@ print "</section>\n";
 
 # Mostrar los resultados de la búsqueda (esto es solo ejemplo)
 print "<section class='section-tabla'>\n";
+print "<div class='divTable'>\n";
+print "<div class='divTableHeading'>\n";
+print "<div class='divTableRow div-text-center'>\n";
+print "<div class='divTableHead tab-codigo'>CODIGO_ENTIDAD</div>\n";
+print "<div class='divTableHead tab-nombre'>NOMBRE</div>\n";
+print "<div class='divTableHead tab-gestion'>TIPO_GESTIÓN</div>\n";
+print "<div class='divTableHead tab-estado'>ESTADO_LICENCIAMIENTO</div>\n";
+print "<div class='divTableHead tab-inicio'>FECHA_INICIO_LICENCIAMIENTO</div>\n";
+print "<div class='divTableHead tab-fin'>FECHA_FIN_LICENCIAMIENTO</div>\n";
+print "<div class='divTableHead tab-periodo'>PERIODO_LICENCIAMIENTO</div>\n";
+print "<div class='divTableHead tab-departamento'>DEPARTAMENTO</div>\n";
+print "<div class='divTableHead tab-provincia'>PROVINCIA</div>\n";
+print "<div class='divTableHead tab-distrito'>DISTRITO</div>\n";
+print "<div class='divTableHead tab-ubigeo'>UBIGEO</div>\n";
+print "<div class='divTableHead tab-latitud'>LATITUD</div>\n";
+print "<div class='divTableHead tab-longitud'>LONGITUD</div>\n";
+print "<div class='divTableHead tab-corte'>FECHA_CORTE</div>\n";
+print "<div class='divTableHead tab-dir'>DIRECCIÓN</div>\n";
+print "</div>\n";
+print "</div>\n";
+print "<div class='divTableBody'>\n";
 
 my $contador = 0;
+
 while(my $line = <IN>) {
     my %dict = sacar_datos($line);
     my $valor = $dict{$seccion} || "";
     if ($valor =~ /.*$busqueda.*/ || $valor eq "") {
-
-        #tabla de headers
-        if ($contador == 0) {
-            print "<div class='divTable'>\n";
-            print "<div class='divTableHeading'>\n";
-            print "<div class='divTableRow div-text-center'>\n";
-            print "<div class='divTableHead tab-codigo'>CODIGO_ENTIDAD</div>\n";
-            print "<div class='divTableHead tab-nombre'>NOMBRE</div>\n";
-            print "<div class='divTableHead tab-gestion'>TIPO_GESTIÓN</div>\n";
-            print "<div class='divTableHead tab-estado'>ESTADO_LICENCIAMIENTO</div>\n";
-            print "<div class='divTableHead tab-inicio'>FECHA_INICIO_LICENCIAMIENTO</div>\n";
-            print "<div class='divTableHead tab-fin'>FECHA_FIN_LICENCIAMIENTO</div>\n";
-            print "<div class='divTableHead tab-periodo'>PERIODO_LICENCIAMIENTO</div>\n";
-            print "<div class='divTableHead tab-departamento'>DEPARTAMENTO</div>\n";
-            print "<div class='divTableHead tab-provincia'>PROVINCIA</div>\n";
-            print "<div class='divTableHead tab-distrito'>DISTRITO</div>\n";
-            print "<div class='divTableHead tab-ubigeo'>UBIGEO</div>\n";
-            print "<div class='divTableHead tab-latitud'>LATITUD</div>\n";
-            print "<div class='divTableHead tab-longitud'>LONGITUD</div>\n";
-            print "<div class='divTableHead tab-corte'>FECHA_CORTE</div>\n";
-            print "<div class='divTableHead tab-dir'>DIRECCIÓN</div>\n";
-            print "</div>\n";
-            print "</div>\n";
-            print "<div class='divTableBody'>\n";
-        }
 
         if ($dict{departamento} =~ /$departamento/ &&
             ($provincia eq "" || $dict{provincia} =~ /$provincia/) &&
@@ -189,7 +186,7 @@ while(my $line = <IN>) {
             print "<div class='divTableCell tab-latitud'>$dict{latitud}</div>\n";
             print "<div class='divTableCell tab-longitud'>$dict{longitud}</div>\n";
             print "<div class='divTableCell tab-corte'>$dict{fecha_corte}</div>\n";
-            print "<div class='divTableCell tab-dir'><a href='https://google.com/maps/place/$dict{latitud},$dict{longitud}'/a>Ver dirección</div>\n";
+            print "<div class='divTableCell tab-dir'><a href='https://google.com/maps/place/$dict{latitud},$dict{longitud}'>Ver dirección</a></div>\n";
             print "</div>\n";
 
             $contador++;
