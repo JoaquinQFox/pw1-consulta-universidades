@@ -5,6 +5,7 @@ use warnings;
 use utf8;
 use open ':std', ':encoding(UTF-8)';
 use CGI;
+use Text::Unidecode;
 
 #Función que de una linea de los datos csv sacara cada parte y la pondra en un hashmap que luego retornara
 sub sacar_datos {
@@ -29,8 +30,8 @@ sub sacar_datos {
         $dict{nombre} = $2;
         $dict{seccion_gestion} = $3;
         $dict{estado_licenciamiento} = $4;
-        $dict{fecha_inicio_licenciamiento} = $5;
-        $dict{fecha_fin_licenciamiento} = $6;
+        $dict{fecha_inicio_licenciamiento} = $5 || "";
+        $dict{fecha_fin_licenciamiento} = $6 || "";
         $dict{periodo_licenciamiento} = $7;
         $dict{departamento} = $8;
         $dict{provincia} = $9;
@@ -48,15 +49,11 @@ my $cgi = CGI -> new();
 my $seccion = $cgi->param("section") || "";
 
 my $busqueda = $cgi->param("busqueda") || "";
-$busqueda = uc($busqueda);
 
 my $departamento = $cgi->param("departamento") || "";
 my $provincia = $cgi->param("provincia") || "";
 my $distrito = $cgi->param("distrito") || "";
 
-$departamento = uc($departamento);
-$provincia = uc($provincia);
-$distrito = uc($distrito);
 
 #Abre archivo
 open(IN, "<:encoding(UTF-8)","./Universidades_Lab06.csv") or die "No se puede abrir el archivo de texto\n";
@@ -160,48 +157,65 @@ print "</div>\n";
 print "</div>\n";
 print "<div class='divTableBody'>\n";
 
+$busqueda =~ s/^\s+|\s+$//g;
+
+$provincia =~ s/^\s+|\s+$//g;
+$distrito =~ s/^\s+|\s+$//g;
+
 my $contador = 0;
+
+$busqueda = unidecode(uc($busqueda));
+
+$departamento = unidecode(uc($departamento));
+$provincia = unidecode(uc($provincia));
+$distrito = unidecode(uc($distrito));
 
 while(my $line = <IN>) {
     my %dict = sacar_datos($line);
-    my $valor = $dict{$seccion} || "";
-    if ($valor =~ /.*$busqueda.*/ || $valor eq "") {
-
-        if ($dict{departamento} =~ /$departamento/ &&
-            ($provincia eq "" || $dict{provincia} =~ /$provincia/) &&
-            ($distrito eq "" || $dict{distrito} =~ /$distrito/) ) {
-
-            print "<div class='divTableRow'>\n";
-            print "<div class='divTableCell tab-codigo'>$dict{codigo_entidad}</div>\n";
-            print "<div class='divTableCell tab-nombre'>$dict{nombre}</div>\n";
-            print "<div class='divTableCell tab-gestion'>$dict{seccion_gestion}</div>\n";
-            print "<div class='divTableCell tab-estado'>$dict{estado_licenciamiento}</div>\n";
-            print "<div class='divTableCell tab-inicio'>$dict{fecha_inicio_licenciamiento}</div>\n";
-            print "<div class='divTableCell tab-fin'>$dict{fecha_fin_licenciamiento}</div>\n";
-            print "<div class='divTableCell tab-periodo'>$dict{periodo_licenciamiento}</div>\n";
-            print "<div class='divTableCell tab-departamento'>$dict{departamento}</div>\n";
-            print "<div class='divTableCell tab-provincia'>$dict{provincia}</div>\n";
-            print "<div class='divTableCell tab-distrito'>$dict{distrito}</div>\n";
-            print "<div class='divTableCell tab-ubigeo'>$dict{ubigeo}</div>\n";
-            print "<div class='divTableCell tab-latitud'>$dict{latitud}</div>\n";
-            print "<div class='divTableCell tab-longitud'>$dict{longitud}</div>\n";
-            print "<div class='divTableCell tab-corte'>$dict{fecha_corte}</div>\n";
-            print "<div class='divTableCell tab-dir'><a href='https://google.com/maps/place/$dict{latitud},$dict{longitud}'>Ver dirección</a></div>\n";
-            print "</div>\n";
-
-            $contador++;
-        }
+    $busqueda = unidecode($busqueda);
+    my $match = 1; 
+    if ($seccion ne "" && unidecode($dict{$seccion}) !~ /.*$busqueda.*/) {
+        $match = 0;
     }
-    
+
+    if ($departamento ne "" && unidecode($dict{departamento}) !~ /$departamento/) {
+        $match = 0;
+    }
+
+    if ($provincia ne "" && unidecode($dict{provincia}) !~ /.*$provincia.*/) {
+        $match = 0;
+    }
+
+    if ($distrito ne "" && unidecode($dict{distrito}) !~ /.*$distrito.*/) {
+        $match = 0;
+    }
+
+    if ($match == 1) {
+        $contador++;
+        print "<div class='divTableRow'>\n";
+        print "<div class='divTableCell tab-codigo'>$dict{codigo_entidad}</div>\n";
+        print "<div class='divTableCell tab-nombre'>$dict{nombre}</div>\n";
+        print "<div class='divTableCell tab-gestion'>$dict{seccion_gestion}</div>\n";
+        print "<div class='divTableCell tab-estado'>$dict{estado_licenciamiento}</div>\n";
+        print "<div class='divTableCell tab-inicio'>$dict{fecha_inicio_licenciamiento}</div>\n";
+        print "<div class='divTableCell tab-fin'>$dict{fecha_fin_licenciamiento}</div>\n";
+        print "<div class='divTableCell tab-periodo'>$dict{periodo_licenciamiento}</div>\n";
+        print "<div class='divTableCell tab-departamento'>$dict{departamento}</div>\n";
+        print "<div class='divTableCell tab-provincia'>$dict{provincia}</div>\n";
+        print "<div class='divTableCell tab-distrito'>$dict{distrito}</div>\n";
+        print "<div class='divTableCell tab-ubigeo'>$dict{ubigeo}</div>\n";
+        print "<div class='divTableCell tab-latitud'>$dict{latitud}</div>\n";
+        print "<div class='divTableCell tab-longitud'>$dict{longitud}</div>\n";
+        print "<div class='divTableCell tab-corte'>$dict{fecha_corte}</div>\n";
+        print "<div class='divTableCell tab-dir'><a href='https://google.com/maps/place/$dict{latitud},$dict{longitud}'>Ver dirección</a></div>\n";
+        print "</div>\n";
+    }
 }
+
+print "</div>\n";  # Cierra la divTableBody
+print "</div>\n";  # Cierra la divTable
 
 close(IN);
-if ($contador != 0) {
-    print "</div>\n";  # Cierra la divTableBody
-    print "</div>\n";  # Cierra la divTable
-}
-
-
 print "<div class='div-resultados-text'>\n";
 print "<p>Encontrados: $contador Universidades</p>\n";
 print "</div>\n";
