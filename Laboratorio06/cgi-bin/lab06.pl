@@ -189,7 +189,7 @@ while(my $line = <IN>) {
             print "<div class='divTableCell tab-latitud'>$dict{latitud}</div>\n";
             print "<div class='divTableCell tab-longitud'>$dict{longitud}</div>\n";
             print "<div class='divTableCell tab-corte'>$dict{fecha_corte}</div>\n";
-            print "<div class='divTableCell tab-dir'><a href='#'>Ver dirección</a></div>\n";
+            print "<div class='divTableCell tab-dir'><a href='https://google.com/maps/place/$dict{latitud},$dict{longitud}'/a>Ver dirección</div>\n";
             print "</div>\n";
 
             $contador++;
