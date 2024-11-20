@@ -1,3 +1,5 @@
+# Nombre: Joaquin Alejandro Quispe Bedregal
+
 # Pasos para construir y ejecutar el proyecto en Docker
 
 1. Construir la imagen 
